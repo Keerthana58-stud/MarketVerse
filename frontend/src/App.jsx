@@ -15,6 +15,7 @@ import EditProduct from './pages/EditProduct';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import BuyerOrders from './pages/BuyerOrders';
+import Chatbot from './components/Chatbot';
 
 const HomeRedirect = () => {
   const token = localStorage.getItem('token');
@@ -117,6 +118,7 @@ function App() {
           />
         </Routes>
       </div>
+      <Chatbot />
     </Router>
   );
 }

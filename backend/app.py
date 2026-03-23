@@ -6,6 +6,7 @@ from routes.auth_routes import get_auth_routes
 from routes.product_routes import get_product_routes
 from routes.cart_routes import get_cart_routes
 from routes.order_routes import get_order_routes
+from routes.chatbot_routes import get_chatbot_routes
 import os
 
 app = Flask(__name__)
@@ -24,6 +25,7 @@ app.register_blueprint(get_auth_routes(db), url_prefix='/api/auth')
 app.register_blueprint(get_product_routes(db), url_prefix='/api/products')
 app.register_blueprint(get_cart_routes(db), url_prefix='/api/cart')
 app.register_blueprint(get_order_routes(db), url_prefix='/api/orders')
+app.register_blueprint(get_chatbot_routes(db), url_prefix='/api/chatbot')
 
 @app.route('/', methods=['GET'])
 def health_check():

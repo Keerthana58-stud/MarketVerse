@@ -48,4 +48,7 @@ export const fetchSellerOrders = () => api.get('/orders/seller');
 export const fetchBuyerSummary = () => api.get('/auth/buyer-summary');
 export const fetchSellerSummary = () => api.get('/auth/seller-summary');
 
+// Chatbot API
+export const sendChatMessage = (payload) => api.post('/chatbot/message', payload);
+
 export default api;
