@@ -3,7 +3,7 @@ from bson import ObjectId
 
 class ProductModel:
     @staticmethod
-    def create_product(db, seller_id, item_name, image_path, price, description, category):
+    def create_product(db, seller_id, item_name, image_path, price, description, category, stock):
         product_data = {
             "seller_id": str(seller_id),
             "item_name": item_name,
@@ -11,6 +11,7 @@ class ProductModel:
             "price": float(price),
             "description": description,
             "category": category,
+            "stock": int(stock),
             "created_at": datetime.utcnow()
         }
         return db.products.insert_one(product_data)

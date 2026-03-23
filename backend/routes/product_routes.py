@@ -44,8 +44,9 @@ def get_product_routes(db):
         price = request.form.get('price')
         description = request.form.get('description')
         category = request.form.get('category')
+        stock = request.form.get('stock')
 
-        if not all([item_name, price, description, category]):
+        if not all([item_name, price, description, category, stock is not None]):
             return jsonify({'message': 'Missing product details', 'success': False}), 400
 
         ProductModel.create_product(
@@ -55,7 +56,8 @@ def get_product_routes(db):
             f"/static/uploads/{filename}", 
             price, 
             description, 
-            category
+            category,
+            stock
         )
 
         return jsonify({'message': 'Product added successfully', 'success': True}), 201
@@ -124,6 +126,8 @@ def get_product_routes(db):
                 
         if 'price' in data:
             data['price'] = float(data['price'])
+        if 'stock' in data:
+            data['stock'] = int(data['stock'])
             
         ProductModel.update_product(db, id, current_user['_id'], data)
         return jsonify({'message': 'Product updated successfully', 'success': True}), 200

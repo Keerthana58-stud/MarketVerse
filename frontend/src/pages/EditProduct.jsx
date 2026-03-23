@@ -9,6 +9,7 @@ const EditProduct = () => {
   const [formData, setFormData] = useState({
     item_name: '',
     price: '',
+    stock: '',
     description: '',
     category: ''
   });
@@ -30,6 +31,7 @@ const EditProduct = () => {
         setFormData({
           item_name: product.item_name,
           price: product.price,
+          stock: product.stock || 0,
           description: product.description,
           category: product.category
         });
@@ -56,6 +58,7 @@ const EditProduct = () => {
     const data = new FormData();
     data.append('item_name', formData.item_name);
     data.append('price', formData.price);
+    data.append('stock', formData.stock);
     data.append('description', formData.description);
     data.append('category', formData.category);
     
@@ -90,8 +93,13 @@ const EditProduct = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Price ($)</Form.Label>
+                  <Form.Label>Price (₹)</Form.Label>
                   <Form.Control type="number" step="0.01" name="price" value={formData.price} required onChange={handleChange} />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Available Stock</Form.Label>
+                  <Form.Control type="number" name="stock" min="0" value={formData.stock} required onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group className="mb-3">

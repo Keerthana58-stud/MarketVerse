@@ -8,6 +8,7 @@ const AddProduct = () => {
   const [formData, setFormData] = useState({
     item_name: '',
     price: '',
+    stock: '',
     description: '',
     category: '' // Start empty so user has to select
   });
@@ -37,6 +38,7 @@ const AddProduct = () => {
     const data = new FormData();
     data.append('item_name', formData.item_name);
     data.append('price', formData.price);
+    data.append('stock', formData.stock);
     data.append('description', formData.description);
     data.append('category', formData.category);
     data.append('image', image);
@@ -66,8 +68,13 @@ const AddProduct = () => {
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Price ($)</Form.Label>
+                  <Form.Label>Price (₹)</Form.Label>
                   <Form.Control type="number" step="0.01" name="price" required onChange={handleChange} />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <Form.Label>Available Stock</Form.Label>
+                  <Form.Control type="number" name="stock" min="0" required onChange={handleChange} />
                 </Form.Group>
 
                 <Form.Group className="mb-3">

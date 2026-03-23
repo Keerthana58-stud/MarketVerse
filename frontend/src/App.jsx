@@ -14,6 +14,7 @@ import AddProduct from './pages/AddProduct';
 import EditProduct from './pages/EditProduct';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import BuyerOrders from './pages/BuyerOrders';
 
 const HomeRedirect = () => {
   const token = localStorage.getItem('token');
@@ -51,7 +52,7 @@ function App() {
           <Route 
             path="/catalogue" 
             element={
-              <ProtectedRoute roleRequired="buyer">
+              <ProtectedRoute>
                 <Catalogue />
               </ProtectedRoute>
             } 
@@ -59,7 +60,7 @@ function App() {
           <Route 
             path="/product/:id" 
             element={
-              <ProtectedRoute roleRequired="buyer">
+              <ProtectedRoute>
                 <ProductDetails />
               </ProtectedRoute>
             } 
@@ -77,6 +78,14 @@ function App() {
             element={
               <ProtectedRoute roleRequired="buyer">
                 <Checkout />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/buyer-orders" 
+            element={
+              <ProtectedRoute roleRequired="buyer">
+                <BuyerOrders />
               </ProtectedRoute>
             } 
           />

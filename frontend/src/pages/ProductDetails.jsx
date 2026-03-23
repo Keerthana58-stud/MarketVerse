@@ -86,6 +86,14 @@ const ProductDetails = () => {
               <p className="text-muted mb-2"><strong>Category:</strong> {product.category}</p>
               <p className="text-muted mb-4"><strong>Seller:</strong> {product.seller_name || 'Anonymous'}</p>
               
+              <div className="mb-4">
+                {product.stock > 0 ? (
+                  <span className="badge bg-success fs-6">In Stock: {product.stock} units</span>
+                ) : (
+                  <span className="badge bg-danger fs-6">Out of Stock</span>
+                )}
+              </div>
+              
               <h5>Description</h5>
               <p className="mb-4" style={{ whiteSpace: 'pre-wrap' }}>{product.description}</p>
               

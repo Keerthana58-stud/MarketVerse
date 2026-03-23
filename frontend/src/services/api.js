@@ -43,5 +43,9 @@ export const removeFromCart = (productId) => api.delete(`/cart/remove/${productI
 
 // Order APIs
 export const placeOrder = (orderData) => api.post('/orders/place', orderData);
+export const fetchBuyerOrders = () => api.get('/orders/buyer');
+export const fetchSellerOrders = () => api.get('/orders/seller');
+export const fetchBuyerSummary = () => api.get('/auth/buyer-summary');
+export const fetchSellerSummary = () => api.get('/auth/seller-summary');
 
 export default api;

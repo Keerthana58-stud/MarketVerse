@@ -15,7 +15,14 @@ const ProductCard = ({ product }) => {
       />
       <Card.Body className="d-flex flex-column">
         <Card.Title>{product.item_name}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{formatCurrency(product.price)}</Card.Subtitle>
+        <Card.Subtitle className="mb-2 text-primary">{formatCurrency(product.price)}</Card.Subtitle>
+        <div className="mb-2 small">
+          {product.stock > 0 ? (
+            <span className="text-success">In Stock: {product.stock}</span>
+          ) : (
+            <span className="text-danger fw-bold">Out of Stock</span>
+          )}
+        </div>
         <Card.Text className="text-truncate">
           {product.description}
         </Card.Text>

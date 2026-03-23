@@ -65,4 +65,42 @@ def get_auth_routes(db):
             }
         }), 200
 
+    @auth_bp.route('/buyer-summary', methods=['GET'])
+    @token_required(db)
+    def buyer_summary(current_user):
+        if current_user.get('role') != 'buyer':
+            return jsonify({'message': 'Unauthorized', 'success': False}), 403
+            
+        cart = db.carts.find_one({"buyer_id": str(current_user['_id'])})
+        cart_items_count = len(cart.get('products', [])) if cart else 0
+        
+        orders = list(db.orders.find({"buyer_id": str(current_user['_id'])}))
+        total_orders = len(orders)
+        total_spent = sum(float(o.get('total_amount', 0.0)) for o in orders)
+        
+        return jsonify({'success': True, 'summary': {'cart_items': cart_items_count, 'total_orders': total_orders, 'total_spent': total_spent}}), 200
+
+    @auth_bp.route('/seller-summary', methods=['GET'])
+    @token_required(db)
+    def seller_summary(current_user):
+        if current_user.get('role') != 'seller':
+            return jsonify({'message': 'Unauthorized', 'success': False}), 403
+            
+        products = list(db.products.find({"seller_id": str(current_user['_id'])}))
+        total_products = len(products)
+        total_stock = sum(int(p.get('stock', 0)) for p in products)
+        
+        seller_id_str = str(current_user['_id'])
+        relevant_orders = list(db.orders.find({"products.seller_id": seller_id_str}))
+        
+        total_orders = len(relevant_orders) 
+        total_revenue = 0.0
+        
+        for o in relevant_orders:
+            for p in o.get('products', []):
+                if p.get('seller_id') == seller_id_str:
+                    total_revenue += float(p.get('price', 0)) * int(p.get('quantity', 1))
+                    
+        return jsonify({'success': True, 'summary': {'total_products': total_products, 'total_stock': total_stock, 'total_orders': total_orders, 'total_revenue': total_revenue}}), 200
+
     return auth_bp

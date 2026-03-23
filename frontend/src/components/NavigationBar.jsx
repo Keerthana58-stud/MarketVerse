@@ -19,7 +19,7 @@ const NavigationBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">Catalogue</Nav.Link>
+            <Nav.Link as={Link} to="/catalogue">Catalogue</Nav.Link>
             {user?.role === 'buyer' && (
               <>
                 <Nav.Link as={Link} to="/buyer-dashboard">Buyer Dashboard</Nav.Link>
