@@ -1,0 +1,15 @@
+# Backend
+backend/venv/
+backend/__pycache__/
+backend/.env
+backend/static/uploads/
+
+# Frontend (Vite usually handles this in frontend/.gitignore, but adding for safety)
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# OS specifics
+.DS_Store
+Thumbs.db
